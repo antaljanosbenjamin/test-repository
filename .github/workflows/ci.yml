@@ -12,18 +12,20 @@ on:
 jobs:
   check_openssl_version_windows:
     runs-on: windows-latest
-    strategy:
-      matrix:
-        arch:
-          - { mingw: "64", msys: x86_64, python: "x64" }
     steps:
-      - uses: msys2/setup-msys2@v2
+      - name: Setup msys2 and OpenSSL
+        uses: msys2/setup-msys2@v2
         with:
-          msystem: MINGW${{ matrix.arch.mingw }}
+          msystem: MINGW64
           update: true
           release: false
-          install: mingw-w64-${{ matrix.arch.msys }}-openssl
-      - shell: msys2 {0}
+          install: mingw-w64-x86_64-openssl
+      - name: Print OpenSSL version
+        shell: msys2 {0}
+        run: |
+          openssl version -a
+      - name: Check version
+        shell: msys2 {0}
         run: |
           [ `openssl version -v | cut -d ' ' -f 2` == "${{ github.event.inputs.openssl_version }}" ]
 
@@ -36,6 +38,9 @@ jobs:
       - name: Install OpenSSL
         run: |
           brew install openssl@1.1
+      - name: Print OpenSSL version
+        run: |
+          openssl version -a
       - name: Check version
         run: |
           [ `openssl version -v | cut -d ' ' -f 2` == "${{ github.event.inputs.openssl_version }}" ]
