@@ -37,7 +37,9 @@ jobs:
     steps:
       - name: Install OpenSSL
         run: |
+          brew update
           brew install openssl@1.1
+          brew upgrade openssl@1.1
       - name: Print OpenSSL version
         run: |
           openssl version -a
