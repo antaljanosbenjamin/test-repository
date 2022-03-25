@@ -1,4 +1,4 @@
-name: CI
+name: Check OpenSSL version
 
 on:
   workflow_dispatch:
@@ -32,7 +32,7 @@ jobs:
   check_openssl_version_macos:
     strategy:
       matrix:
-        platform: [macos-latest, macos-10.15]
+        platform: [macos-latest, macOS-10.15]
     runs-on: ${{ matrix.platform }}
     steps:
       - name: Install OpenSSL
