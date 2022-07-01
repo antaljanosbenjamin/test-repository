@@ -10,7 +10,10 @@ on:
 
 jobs:
   print:
-    - name: "Print"
-      run: |
-        echo github.ref ${{ github.ref }}
-        echo github.ref_name ${{ github.ref_name }}
+    name: "Print"
+    runs-on: ubuntu-20.04
+    steps:
+      - name: "Print"
+        run: |
+          echo github.ref ${{ github.ref }}
+          echo github.ref_name ${{ github.ref_name }}
