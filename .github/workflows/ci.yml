@@ -10,7 +10,7 @@ on:
 
 jobs:
   print:
-    - name: print
+    - name: "Print"
       run: |
         echo github.ref ${{ github.ref }}
         echo github.ref_name ${{ github.ref_name }}
